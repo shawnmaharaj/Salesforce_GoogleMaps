@@ -1,0 +1,40 @@
+<apex:page docType="html-5.0" controller="PersonController" sidebar="false" showheader="false">
+  <apex:form >
+      <apex:pageBlock title="Save Person">
+          <apex:panelGrid >
+              <apex:outputLabel >Name:</apex:outputLabel> 
+              <apex:inputText label="Name:" size="30" value="{!person.Name}"/>
+              <apex:outputLabel >Age:</apex:outputLabel> 
+              <apex:inputText size="30" value="{!person.Age}"/>
+              <apex:outputLabel >Is Employed:<apex:inputCheckbox value="{!person.IsEmployed}"/></apex:outputLabel> 
+              
+              <apex:outputLabel >Date of Birth:</apex:outputLabel>
+              <apex:input type="date" value="{!person.DateOfBirth}"/>
+              <apex:outputLabel >Phone Number:</apex:outputLabel> 
+              <apex:inputText size="30" value="{!person.PhoneNumber}"/>
+              <apex:outputLabel >Sex:</apex:outputLabel> 
+              <apex:selectList value="{!person.Sex}" multiselect="false" size="2">
+                  <apex:selectOption itemValue="Male"  itemLabel="Male"></apex:selectOption>
+                  <apex:selectOption itemValue="Female" itemLabel="Female"></apex:selectOption>
+              </apex:selectList>
+          </apex:panelGrid>
+          <apex:commandButton value="Save" action="{!saveperson}"/>
+      </apex:pageBlock>
+  
+      <apex:pageBlock title="Search Interface">
+          <apex:inputText size="30" value="{!keyword}"/>
+          <apex:commandButton value="Search Now" action="{!search}"/>
+          
+          <apex:pageBlockSection title="Results" collapsible="false" columns="1">
+              <apex:pageBlockTable value="{!people}" var="p">
+                <apex:column value="{!p.Name__c}"/>
+                <apex:column value="{!p.Age__c}"/>
+                <apex:column value="{!p.Date_of_Birth__c}"/>
+                <apex:column value="{!p.IsEmployed__c}"/>
+                <apex:column value="{!p.Phone_Number__c}"/>
+                <apex:column value="{!p.Sex__c}"/> 
+              </apex:pageBlockTable>
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

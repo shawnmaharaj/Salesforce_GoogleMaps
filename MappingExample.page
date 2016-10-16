@@ -1,0 +1,39 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="true" applyBodyTag="false">
+    <head>
+        <!--<link rel="stylesheet" type="text/css" href="{!$Resource.bootstrap_v320}" />-->
+        <link rel="stylesheet" type="text/css" href="{!$Resource.mapcss}" />
+    </head>
+    <body ng-app="AddressApp">
+        <apex:form >
+          <apex:pageBlock title="Address">
+              <apex:panelGrid columns="3">
+                <c:AddressComponent /> <!-- regular visualforce component, uses viewstate which is slow -->
+                <c:TableComponent /> <!-- angular component -->
+
+                
+                <!-- ONLY AVAILABLE IN ENTERPRISE VERSION?
+                <apex:map width="400px" height="200px" mapType="roadmap" zoomLevel="16" center="{latitude:{{Latitude}},longitude:{{Longitude}}}">
+                     <apex:mapMarker title="{!address.Name}" position="{latitude:{{Latitude}},longitude:{{Longitude}}}"/>
+                </apex:map>
+                -->
+              </apex:panelGrid>
+          </apex:pageBlock>
+      </apex:form>
+      
+        <!-- javascript remoting objects to access angular code -->
+        <apex:remoteObjects jsNamespace="$Address">
+            <apex:remoteObjectModel name="Address__c" fields="Street_Name__c,StreetNumber__c,City__c,Postal_Code__c,Province__c,Country__c" jsShorthand="AddressEntity"/>
+        </apex:remoteObjects>
+        
+        <!-- Having the map in a component doesnt work properly -->
+        <!-- <c:MapComponent /> -->
+        <div id="map" style="height:50%; margin:10; padding:10;"></div>
+        <script src="{!$Resource.angular_v157}"></script>
+        <script src="{!$Resource.mapscripts}"></script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=INSERT_API_KEY_HERE"></script>
+        <!-- $Resource.googlemaps only works for 1 day or so then authorization error -->
+        <!--<script src="{!$Resource.googlemaps}"></script>-->
+
+    </body>
+</apex:page>

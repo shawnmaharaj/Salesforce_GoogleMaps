@@ -1,0 +1,50 @@
+<apex:component controller="AddressController">
+    <div ng-controller="AngularController">
+        <apex:pageBlock title="Save Address Using Angular">
+                  <span>Street Number:</span>  <!-- !streetNum  -->
+                  <input type="number" size="20" placeholder="2700" ng-model="addr.StreetNumber"/><br/><br/>
+                  <span>Street Name:</span> 
+                  <input type="text" size="20" placeholder="Production Way" ng-model="addr.StreetName"/><br/><br/>
+                  <span>City:</span> 
+                  <input type="text" size="20" placeholder="Burnaby" ng-model="addr.City"/><br/><br/>
+                  <span>Postal Code:</span> 
+                  <input type="text" size="20" placeholder="V5A 0C2" ng-model="addr.PostalCode"/><br/><br/>
+                  <span>Province:</span> 
+                  <input type="text" size="20" placeholder="BC" ng-model="addr.Province"/><br/><br/>
+                  <span>Country:</span> 
+                  <select ng-model="addr.Country" multiselect="false" size="2" style="float:right">
+                      <option value="Canada">Canada</option>
+                      <option value="America">America</option>
+                  </select><br/><br/><br/>
+                  
+                  
+                  <!-- using angular -->
+                  <input type="button" value="Save Address Using Angular" ng-click="SaveAndRefreshAddress();"/>
+         </apex:pageBlock>
+         <apex:pageBlock title="Display data via Angular">
+         <table>
+             <thead>
+                 <td>Street Number</td>
+                 <td>Street Name</td>
+                 <td>City</td>
+                 <td>Postal Code</td>
+                 <td>Province</td>
+                 <td>Country</td>
+                 <td></td>
+             </thead>
+             <tbody>
+                 <tr ng-repeat="address in addressList">
+                     <td>{{address.StreetNumber}}</td>
+                     <td>{{address.StreetName}}</td>
+                     <td>{{address.City}}</td>
+                     <td>{{address.PostalCode}}</td>
+                     <td>{{address.Province}}</td>
+                     <td>{{address.Country}}</td>
+                     <td><a href='' target='_blank' ng-click="GetGeocode(address.StreetNumber, address.StreetName, address.City, address.PostalCode, address.Province, address.Country)">MAP ADDRESS</a></td>
+                 </tr>
+             </tbody>
+         </table>
+
+         </apex:pageBlock>
+    </div>
+</apex:component>

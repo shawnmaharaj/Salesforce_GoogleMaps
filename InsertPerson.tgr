@@ -1,0 +1,26 @@
+trigger InsertPerson on Person__c (after insert) {
+    if (Trigger.isInsert) {
+
+        if (Trigger.isAfter) {
+            // send an email after insert
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            String[] toAddresses = new String[] {'shawn_maharaj@hotmail.com'};
+
+            // Assign the addresses for the To and CC lists to the mail object.
+            mail.setToAddresses(toAddresses);
+
+            // Specify the name used as the display name.
+            mail.setSenderDisplayName('Person Inserted Alert');
+            
+            // Specify the text content of the email.
+            mail.setPlainTextBody('A user ' + case.Id +' has been created.');
+
+            // Send the email you have created.
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { mail });
+        }       
+
+    }
+    else {
+        System.Debug(Logginglevel.INFO, 'Trigger failed');
+    }
+}

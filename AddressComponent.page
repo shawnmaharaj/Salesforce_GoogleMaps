@@ -1,0 +1,26 @@
+<!-- Standard Apex and Visualforce MVC -->
+<apex:component controller="AddressController" allowDML="true">
+    <!--<apex:attribute name="streetNum" description="This is the value for the component." type="String" required="false"/>-->
+          <!-- all static text in all pages should be in some static "resource set" file similar to c# .resx pages -->  
+          <apex:pageBlock title="Save Address">
+              <apex:outputLabel >Street Number:</apex:outputLabel>  <!-- !streetNum  -->
+              <apex:inputText size="20" html-placeholder="301" value="{!address.StreetNumber}"/><br/><br/>
+              <apex:outputLabel >Street Name:</apex:outputLabel> 
+              <apex:inputText size="20" html-placeholder="Front St W" value="{!address.StreetName}"/><br/><br/>
+              <apex:outputLabel >City:</apex:outputLabel> 
+              <apex:inputText size="20" html-placeholder="Toronto" value="{!address.City}"/><br/><br/>
+              <apex:outputLabel >Postal Code:</apex:outputLabel> 
+              <apex:inputText size="20" html-placeholder="M5V 2T6" value="{!address.PostalCode}"/><br/><br/>
+              <apex:outputLabel >Province:</apex:outputLabel> 
+              <apex:inputText size="20" html-placeholder="Ontario" value="{!address.Province}"/><br/><br/>
+              <apex:outputLabel >Country:</apex:outputLabel> 
+              <apex:selectList value="{!address.Country}" multiselect="false" size="2" style="float:right">
+                  <apex:selectOption itemValue="Canada"  itemLabel="Canada"></apex:selectOption>
+                  <apex:selectOption itemValue="America" itemLabel="America"></apex:selectOption>
+              </apex:selectList><br/><br/><br/>
+              
+              <!-- using standard apex -->
+              <apex:commandButton value="Save Address Using Traditional Apex" action="{!saveAddress}"/><br/><br/>
+              
+          </apex:pageBlock>
+</apex:component>
